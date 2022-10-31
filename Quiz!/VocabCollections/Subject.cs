@@ -69,18 +69,11 @@ namespace Vokabeltrainer.VocabCollections
 
         public void Save()
         {
-            try
-            {
-                DirectoryInfo directory = new DirectoryInfo(AppContext.BaseDirectory + Name);
-                if(!directory.Exists)
-                    directory.Create();
-                foreach (var lection in Lections)
-                    lection.Save();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            DirectoryInfo directory = new DirectoryInfo(AppContext.BaseDirectory + Name);
+            if(!directory.Exists)
+                directory.Create();
+            foreach (var lection in Lections)
+                lection.Save();
         }
     }
 }

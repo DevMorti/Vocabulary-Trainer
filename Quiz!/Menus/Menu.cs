@@ -10,6 +10,7 @@ namespace Vokabeltrainer.Menus
     {
         public Menu()
         {
+            Console.Clear();
             DisplayMenu();
         }
 

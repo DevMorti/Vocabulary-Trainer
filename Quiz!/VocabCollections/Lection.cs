@@ -21,18 +21,9 @@ namespace Vokabeltrainer.VocabCollections
         public void Save()
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            try
+            using (FileStream fileStream = new FileStream(AppContext.BaseDirectory + $@"{Subject}\{Name}.vocs", FileMode.Create))
             {
-                using (FileStream fileStream = new FileStream(AppContext.BaseDirectory + $@"{Subject}\{Name}.vocs", FileMode.Create))
-                {
-                    binaryFormatter.Serialize(fileStream, this);
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(ex.Message);
-                Console.ResetColor();
+                binaryFormatter.Serialize(fileStream, this);
             }
         }
     }

@@ -64,5 +64,10 @@ namespace Vokabeltrainer.Management
             }
             return lections.ToArray();
         }
+
+        internal static bool CheckIfSubjectExists(string subjectName)
+        {
+            return Directory.Exists(AppContext.BaseDirectory + subjectName);
+        }
     }
 }

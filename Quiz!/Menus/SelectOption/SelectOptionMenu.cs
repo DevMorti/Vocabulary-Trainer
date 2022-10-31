@@ -34,6 +34,7 @@ namespace Vokabeltrainer.Menus.SelectOption
 
         private void DisplayMenu()
         {
+            Console.Clear();
             ConsoleKeyInfo key;
             do
             {
@@ -41,6 +42,7 @@ namespace Vokabeltrainer.Menus.SelectOption
                 key = Console.ReadKey();
                 if(key.Key == ConsoleKey.Enter)
                 {
+                    Console.ResetColor();
                     Options[Index].Action();
                     break;
                 }
