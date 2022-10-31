@@ -58,9 +58,21 @@ namespace Vokabeltrainer.Vocabs
                 return Question;
         }
 
+        public string GetQuestion(AskingDirection direction)
+        {
+            if (direction == AskingDirection.QuestionToAnswer)
+                return Question;
+            else
+                return Answer;
+        }
+
         public override string ToString()
         {
-            return $"{Question} - {Form} - {Answer}";
+            string form = null;
+            if (Form != null)
+                form = $" - {Form}";
+            string asString = $"{Question}{form} - {Answer}";
+            return asString;
         }
     }
 }
