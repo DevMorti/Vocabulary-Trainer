@@ -55,5 +55,13 @@ namespace Vokabeltrainer.Vocabs
             word = word.Trim(new char[] { ' ' });
             return word;
         }
+
+        internal static bool IsVocabString(this string vocab)
+        {
+            int countedSplits = vocab.Where(character => character == '&').Count();
+            if ((countedSplits == 1 || countedSplits == 2) && !vocab.StartsWith("&") && !vocab.EndsWith("&") && !vocab.Contains("&&"))
+                return true;
+            return false;
+        }
     }
 }

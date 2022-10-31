@@ -26,6 +26,18 @@ namespace Vokabeltrainer.Vocabs
             vocab.Level = Level;
         }
 
+        public Vocab(string vocabString)
+        {
+            if (!vocabString.IsVocabString())
+                throw new InvalidOperationException();
+            string[] splittetString = vocabString.Split('&');
+            Question = splittetString[0];
+            Answer = splittetString[splittetString.Length - 1];
+            Level = 0;
+            if(splittetString.Length == 3)
+                Form = splittetString[1];
+        }
+
         public void ChangeToVocab(Vocab changedVocab)
         {
             Question = changedVocab.Question;
@@ -44,6 +56,11 @@ namespace Vokabeltrainer.Vocabs
                 return Question + " " + Form;
             else
                 return Question;
+        }
+
+        public override string ToString()
+        {
+            return $"{Question} - {Form} - {Answer}";
         }
     }
 }
