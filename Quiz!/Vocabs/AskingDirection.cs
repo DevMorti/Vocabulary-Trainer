@@ -11,4 +11,9 @@ namespace Vokabeltrainer.Vocabs
         QuestionToAnswer = 0,
         AnswerToQuestion = 1,
     }
+
+    internal enum AskingDirectionOrRandom
+    {
+
+    }
 }

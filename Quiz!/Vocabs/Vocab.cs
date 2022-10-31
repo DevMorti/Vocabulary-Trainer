@@ -1,4 +1,5 @@
 ﻿using System;
+using Vokabeltrainer.Management;
 
 namespace Vokabeltrainer.Vocabs
 {
@@ -31,8 +32,8 @@ namespace Vokabeltrainer.Vocabs
             if (!vocabString.IsVocabString())
                 throw new InvalidOperationException();
             string[] splittetString = vocabString.Split('&');
-            Question = splittetString[0];
-            Answer = splittetString[splittetString.Length - 1];
+            Answer = splittetString[0];
+            Question = splittetString[splittetString.Length - 1];
             Level = 0;
             if(splittetString.Length == 3)
                 Form = splittetString[1];
@@ -49,13 +50,18 @@ namespace Vokabeltrainer.Vocabs
         public string GetAnswer(AskingDirection direction)
         {
             if (direction == AskingDirection.QuestionToAnswer && Form.Length != 0)
-                return Form + " " + Answer;
-            else if (direction == AskingDirection.QuestionToAnswer && Form.Length == 0)
+                return Answer + " " + Form;
+            else if (direction == AskingDirection.QuestionToAnswer)
                 return Answer;
             else if (Form.Length != 0)
                 return Question + " " + Form;
             else
                 return Question;
+        }
+
+        public string GetAnswer()
+        {
+            return GetAnswer(RequestSettings.AskingDirection);
         }
 
         public string GetQuestion(AskingDirection direction)
@@ -66,12 +72,17 @@ namespace Vokabeltrainer.Vocabs
                 return Answer;
         }
 
+        public string GetQuestion()
+        {
+            return GetQuestion(RequestSettings.AskingDirection);
+        }
+
         public override string ToString()
         {
             string form = null;
             if (Form != null)
                 form = $" - {Form}";
-            string asString = $"{Question}{form} - {Answer}";
+            string asString = $"{Answer}{form} - {Question}";
             return asString;
         }
     }

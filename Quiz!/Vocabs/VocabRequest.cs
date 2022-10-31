@@ -1,4 +1,5 @@
 ﻿using System;
+using Vokabeltrainer.Management;
 
 namespace Vokabeltrainer.Vocabs
 {
@@ -28,6 +29,11 @@ namespace Vokabeltrainer.Vocabs
             return false;
         }
 
+        public bool IsRightInput(string input)
+        {
+            return IsRightInput(input, RequestSettings.AskingDirection);
+        }
+
         public void PrintReaction(string input, AskingDirection direction)
         {
             string answer = GetAnswer(direction);
@@ -38,7 +44,7 @@ namespace Vokabeltrainer.Vocabs
             for (int i = 0; i < answer.Length; i++)
             {
                 char fullChar = answer[i];
-                if (input.Length -1 >= i)
+                if (input.Length < i)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write(fullChar);
@@ -50,12 +56,12 @@ namespace Vokabeltrainer.Vocabs
 
                 if (character == comparedChar && fullChar == '(')
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     positionInBrackets++;
                 }
 
                 else if (character == comparedChar)
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Green;
 
                 else if (fullChar == '(')
                 {
@@ -74,7 +80,13 @@ namespace Vokabeltrainer.Vocabs
 
                 Console.Write(answer[i]);
                 Console.ResetColor();        
-            }    
+            }
+            Console.ResetColor();
+        }
+
+        public void PrintReaction(string input)
+        {
+            PrintReaction(input, RequestSettings.AskingDirection);
         }
 
         public void LogInput(bool rightInput)

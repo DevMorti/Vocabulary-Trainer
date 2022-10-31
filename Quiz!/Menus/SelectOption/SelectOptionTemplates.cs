@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Vokabeltrainer.Management;
 using Vokabeltrainer.Menus;
+using Vokabeltrainer.Vocabs;
 
 namespace Vokabeltrainer.Menus.SelectOption
 {
@@ -31,6 +32,14 @@ namespace Vokabeltrainer.Menus.SelectOption
             options.Add(new Option("Lektion erstellen", () => new CreateLectionMenu()));
             return options;
         }, "Lektion auswählen");
+
+        public static readonly DynamicSelectOptionTemplate AskingDirectionMenu = new DynamicSelectOptionTemplate(() =>
+        {
+            List<Option> options = new List<Option>();
+            options.Add(new Option($"Deutsch -> {SubjectManager.CurrentSubject.Name} + Form", () => RequestSettings.AskingDirection = AskingDirection.QuestionToAnswer));
+            options.Add(new Option($"{SubjectManager.CurrentSubject.Name} -> Form + Deutsch", () => RequestSettings.AskingDirection = AskingDirection.AnswerToQuestion));
+            return options;
+        }, "Abfragerichtung auswählen");
 
         private static List<Option> GetLectionOptions()
         {

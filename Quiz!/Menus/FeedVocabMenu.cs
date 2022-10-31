@@ -21,8 +21,8 @@ namespace Vokabeltrainer.Menus
             Console.WriteLine("Schreibweisen");
             Console.WriteLine("-------------");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Deutsch&Form&{0}", SubjectManager.CurrentSubject.Name);
-            Console.WriteLine("Deutsch&{0}", SubjectManager.CurrentSubject.Name);
+            Console.WriteLine("{0}&Form&Deutsch", SubjectManager.CurrentSubject.Name);
+            Console.WriteLine("{0}&Deutsch", SubjectManager.CurrentSubject.Name);
             Console.ResetColor();
             Console.WriteLine("Befehle");
             Console.WriteLine("-------");
@@ -44,6 +44,7 @@ namespace Vokabeltrainer.Menus
                 Console.WriteLine("Die Lektion konnte nicht fehlerfrei gespeichert werden!");
                 Console.ReadKey();
             }
+            new SelectOptionMenu(SelectOptionTemplates.StartMenu);
         }
 
         private void InputVocabs()
@@ -55,7 +56,6 @@ namespace Vokabeltrainer.Menus
                 input = Console.ReadLine();
                 if(input.ToLower() == "cancel")
                 {
-                    new SelectOptionMenu(SelectOptionTemplates.StartMenu);
                     break;
                 }
                 else if(input.ToLower() == "edit --rmlast" && LectionManager.CurrentLection.Count != 0)
