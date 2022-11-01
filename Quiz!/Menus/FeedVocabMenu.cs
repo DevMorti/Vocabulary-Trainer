@@ -15,6 +15,23 @@ namespace Vokabeltrainer.Menus
         {
             new SelectOptionMenu(SelectOptionTemplates.SubjectMenuCreate);
             new SelectOptionMenu(SelectOptionTemplates.LectionMenuCreate);
+            StartFeeding();
+            Console.WriteLine("Lektion wird gespeichert...");
+            try
+            {
+                LectionManager.CurrentLection.Save();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Die Lektion konnte nicht fehlerfrei gespeichert werden!");
+                Console.ReadKey();
+            }
+            new SelectOptionMenu(SelectOptionTemplates.StartMenu);
+        }
+
+        private void StartFeeding()
+        {
             Console.Clear();
             Console.WriteLine("Vokabeln eingeben");
             Console.WriteLine();
@@ -26,25 +43,16 @@ namespace Vokabeltrainer.Menus
             Console.ResetColor();
             Console.WriteLine("Befehle");
             Console.WriteLine("-------");
-            Console.ForegroundColor= ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("cancel - Eingabe beenden");
             Console.WriteLine("edit --rmlast - Letzte Vokabel löschen");
+            Console.WriteLine("clear - Konsole neu laden");
+            Console.WriteLine("show --all - Letzte Vokabeln anzeigen");
+            Console.WriteLine("edit --rmall - Alle Vokabeln löschen");
             Console.ResetColor();
             //Console.WriteLine("edit --last - Letzte Vokabel editieren");//nicht implementiert
             Console.WriteLine();
             InputVocabs();
-            Console.WriteLine("Lektion wird gespeichert...");
-            try
-            {
-                LectionManager.CurrentLection.Save();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Die Lektion konnte nicht fehlerfrei gespeichert werden!");
-                Console.ReadKey();
-            }
-            new SelectOptionMenu(SelectOptionTemplates.StartMenu);
         }
 
         private void InputVocabs()
@@ -61,6 +69,22 @@ namespace Vokabeltrainer.Menus
                 else if(input.ToLower() == "edit --rmlast" && LectionManager.CurrentLection.Count != 0)
                 {
                     LectionManager.CurrentLection.Remove(LectionManager.CurrentLection.Last());
+                }
+                else if(input.ToLower() == "edit --rmall")
+                {
+                    LectionManager.CurrentLection.Clear();
+                }
+                else if(input.ToLower() == "clear")
+                {
+                    StartFeeding();
+                    break;
+                }
+                else if(input.ToLower() == "show --all")
+                {
+                    foreach(Vocab vocab in LectionManager.CurrentLection)
+                    {
+                        Console.WriteLine(vocab.ToString());
+                    }
                 }
                 else if (input.IsVocabString())
                 {

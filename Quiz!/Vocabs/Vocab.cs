@@ -35,8 +35,10 @@ namespace Vokabeltrainer.Vocabs
             Answer = splittetString[0];
             Question = splittetString[splittetString.Length - 1];
             Level = 0;
-            if(splittetString.Length == 3)
+            if (splittetString.Length == 3)
                 Form = splittetString[1];
+            else
+                Form = null;
         }
 
         public void ChangeToVocab(Vocab changedVocab)
@@ -49,11 +51,11 @@ namespace Vokabeltrainer.Vocabs
 
         public string GetAnswer(AskingDirection direction)
         {
-            if (direction == AskingDirection.QuestionToAnswer && Form.Length != 0)
+            if (direction == AskingDirection.QuestionToAnswer && Form != null)
                 return Answer + " " + Form;
             else if (direction == AskingDirection.QuestionToAnswer)
                 return Answer;
-            else if (Form.Length != 0)
+            else if (Form != null)
                 return Question + " " + Form;
             else
                 return Question;

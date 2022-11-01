@@ -44,7 +44,7 @@ namespace Vokabeltrainer.Vocabs
             for (int i = 0; i < answer.Length; i++)
             {
                 char fullChar = answer[i];
-                if (input.Length < i)
+                if (input.Length <= i)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write(fullChar);

@@ -17,8 +17,8 @@ namespace Vokabeltrainer.Menus
             new SelectOptionMenu(SelectOptionTemplates.AskingDirectionMenu);
             Console.Clear();
             RequestLoop(SubjectManager.CurrentSubject.GetRequest());
-            Console.ReadKey();
             SubjectManager.CurrentSubject.Save();
+            new SelectOptionMenu(SelectOptionTemplates.StartMenu);
         }
 
         public void RequestLoop(Queue<VocabRequest> requests)
