@@ -63,7 +63,7 @@ namespace Vokabeltrainer.Vocabs
 
         public string GetAnswer()
         {
-            return GetAnswer(RequestSettings.AskingDirection);
+            return GetAnswer(RequestManager.CurrentRequest.AskingDirection);
         }
 
         public string GetQuestion(AskingDirection direction)
@@ -76,7 +76,7 @@ namespace Vokabeltrainer.Vocabs
 
         public string GetQuestion()
         {
-            return GetQuestion(RequestSettings.AskingDirection);
+            return GetQuestion(RequestManager.CurrentRequest.AskingDirection);
         }
 
         public override string ToString()

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Vokabeltrainer.VocabCollections;
 using Vokabeltrainer.Vocabs;
 
 namespace Vokabeltrainer.Management
 {
-    internal static class RequestSettings
+    internal static class RequestManager
     {
-        internal static AskingDirection AskingDirection { get; set; }
+        public static Request CurrentRequest { get; set; }
     }
 }

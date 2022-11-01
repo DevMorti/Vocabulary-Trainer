@@ -36,8 +36,8 @@ namespace Vokabeltrainer.Menus.SelectOption
         public static readonly DynamicSelectOptionTemplate AskingDirectionMenu = new DynamicSelectOptionTemplate(() =>
         {
             List<Option> options = new List<Option>();
-            options.Add(new Option($"Deutsch -> {SubjectManager.CurrentSubject.Name} + Form", () => RequestSettings.AskingDirection = AskingDirection.QuestionToAnswer));
-            options.Add(new Option($"{SubjectManager.CurrentSubject.Name} -> Form + Deutsch", () => RequestSettings.AskingDirection = AskingDirection.AnswerToQuestion));
+            options.Add(new Option($"Deutsch -> {SubjectManager.CurrentSubject.Name} + Form", () => RequestManager.CurrentRequest.AskingDirection = AskingDirection.QuestionToAnswer));
+            options.Add(new Option($"{SubjectManager.CurrentSubject.Name} -> Form + Deutsch", () => RequestManager.CurrentRequest.AskingDirection = AskingDirection.AnswerToQuestion));
             return options;
         }, "Abfragerichtung auswählen");
 

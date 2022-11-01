@@ -31,14 +31,14 @@ namespace Vokabeltrainer.Menus
                 Console.WriteLine("---------------------------------------");
                 Console.WriteLine();
                 Console.Write("Wort: ");
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(vocab.GetQuestion());
                 string input;
                 while (true)
                 {
                     Console.ResetColor();
                     Console.Write("Antwort: ");
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     input = Console.ReadLine();
                     if (input.Length == 0)
                     {

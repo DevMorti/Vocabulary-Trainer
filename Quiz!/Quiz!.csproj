@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VocabCollections\Request.cs" />
     <Compile Include="Management\RequestSettings.cs" />
     <Compile Include="Management\LectionManager.cs" />
     <Compile Include="Management\SubjectManager.cs" />

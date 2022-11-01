@@ -31,7 +31,7 @@ namespace Vokabeltrainer.Vocabs
 
         public bool IsRightInput(string input)
         {
-            return IsRightInput(input, RequestSettings.AskingDirection);
+            return IsRightInput(input, RequestManager.CurrentRequest.AskingDirection);
         }
 
         public void PrintReaction(string input, AskingDirection direction)
@@ -46,9 +46,23 @@ namespace Vokabeltrainer.Vocabs
                 char fullChar = answer[i];
                 if (input.Length <= i)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(fullChar);
-                    continue;
+                    if (fullChar == '(')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write('(' + lettersBetweenBrackets[positionInBrackets] + ')');
+
+                        answer = answer.Replace('(' + lettersBetweenBrackets[positionInBrackets] + ')', string.Empty)
+                        .Replace("  ", string.Empty).Trim(new char[] { ' ' });
+                        positionInBrackets++;
+                        i--;
+                        continue;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(fullChar);
+                        continue;
+                    }
                 }
 
                 char character = answer.ToLower()[i];
@@ -63,18 +77,6 @@ namespace Vokabeltrainer.Vocabs
                 else if (character == comparedChar)
                     Console.ForegroundColor = ConsoleColor.Green;
 
-                else if (fullChar == '(')
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.Write('(' + lettersBetweenBrackets[positionInBrackets] + ')');
-
-                    answer = answer.Replace('(' + lettersBetweenBrackets[positionInBrackets] + ')', string.Empty)
-                    .Replace("  ", string.Empty).Trim(new char[] { ' ' });
-                    positionInBrackets++;
-                    i--;
-                    continue;
-                }
-
                 else
                     Console.ForegroundColor = ConsoleColor.Red;
 
@@ -86,21 +88,25 @@ namespace Vokabeltrainer.Vocabs
 
         public void PrintReaction(string input)
         {
-            PrintReaction(input, RequestSettings.AskingDirection);
+            PrintReaction(input, RequestManager.CurrentRequest.AskingDirection);
         }
 
         public void LogInput(bool rightInput)
         {
             if (rightInput)
             {
-                if (FirstTimeRight && !LastTimeRight && Level < 7)
+                //FirstTimeRight Standardwert: true
+                if (FirstTimeRight && Level < 7)//wenn Vokabel noch nicht abgefragt wurde und richtig war
                     Level++;
                 LastTimeRight = true;
             }
             else
             {
-                if(!FirstTimeRight && Level > 0)
+                if (FirstTimeRight && Level > 0)//wenn Vokabel noch nicht abgefragt wurde und falsch war
+                {
                     Level--;
+                    RequestManager.CurrentRequest.WrongVocabs.Add(new Vocab(this));
+                }
                 FirstTimeRight = false;
                 LastTimeRight = false;
             }
