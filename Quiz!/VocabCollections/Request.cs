@@ -10,15 +10,15 @@ namespace Vokabeltrainer.VocabCollections
 {
     internal class Request
     {
-        internal AskingDirection AskingDirection { get; set; }
-        internal List<Vocab> WrongVocabs { get; set; }
-        internal Queue<VocabRequest> RequestQueue { get; set; }
+        internal AskingDirection AskingDirection { get; private set; }
+        internal List<Vocab> WrongVocabs { get; private set; }
+        internal Queue<VocabRequest> Requests { get; private set; }
 
         public Request(AskingDirection askingDirection)
         {
             AskingDirection = askingDirection;
             WrongVocabs = new List<Vocab>();
-            RequestQueue = SubjectManager.CurrentSubject.GetRequest();
+            Requests = SubjectManager.CurrentSubject.GetRequest();
         }
     }
 }

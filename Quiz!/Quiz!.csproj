@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="VocabCollections\Request.cs" />
-    <Compile Include="Management\RequestSettings.cs" />
+    <Compile Include="Management\RequestManager.cs" />
     <Compile Include="Management\LectionManager.cs" />
     <Compile Include="Management\SubjectManager.cs" />
     <Compile Include="Vocabs\AskingDirection.cs" />

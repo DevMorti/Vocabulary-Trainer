@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Vokabeltrainer.Management;
 using Vokabeltrainer.Menus;
 using Vokabeltrainer.Vocabs;
+using Vokabeltrainer.VocabCollections;
 
 namespace Vokabeltrainer.Menus.SelectOption
 {
@@ -36,8 +37,14 @@ namespace Vokabeltrainer.Menus.SelectOption
         public static readonly DynamicSelectOptionTemplate AskingDirectionMenu = new DynamicSelectOptionTemplate(() =>
         {
             List<Option> options = new List<Option>();
-            options.Add(new Option($"Deutsch -> {SubjectManager.CurrentSubject.Name} + Form", () => RequestManager.CurrentRequest.AskingDirection = AskingDirection.QuestionToAnswer));
-            options.Add(new Option($"{SubjectManager.CurrentSubject.Name} -> Form + Deutsch", () => RequestManager.CurrentRequest.AskingDirection = AskingDirection.AnswerToQuestion));
+            options.Add(new Option($"Deutsch -> {SubjectManager.CurrentSubject.Name} + Form", () => 
+            {
+                RequestManager.CurrentRequest = new Request(AskingDirection.QuestionToAnswer);
+            }));
+            options.Add(new Option($"{SubjectManager.CurrentSubject.Name} -> Form + Deutsch", () => 
+            { 
+                RequestManager.CurrentRequest = new Request(AskingDirection.AnswerToQuestion); 
+            }));
             return options;
         }, "Abfragerichtung auswählen");
 

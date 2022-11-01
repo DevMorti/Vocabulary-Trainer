@@ -16,13 +16,14 @@ namespace Vokabeltrainer.Menus
             new SelectOptionMenu(SelectOptionTemplates.SubjectMenu);
             new SelectOptionMenu(SelectOptionTemplates.AskingDirectionMenu);
             Console.Clear();
-            RequestLoop(SubjectManager.CurrentSubject.GetRequest());
+            RequestLoop();
             SubjectManager.CurrentSubject.Save();
             new SelectOptionMenu(SelectOptionTemplates.StartMenu);
         }
 
-        public void RequestLoop(Queue<VocabRequest> requests)
+        public void RequestLoop()
         {
+            Queue<VocabRequest> requests = RequestManager.CurrentRequest.Requests;
             while(requests.Count > 0)
             {
                 Console.Clear();
@@ -33,21 +34,7 @@ namespace Vokabeltrainer.Menus
                 Console.Write("Wort: ");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(vocab.GetQuestion());
-                string input;
-                while (true)
-                {
-                    Console.ResetColor();
-                    Console.Write("Antwort: ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    input = Console.ReadLine();
-                    if (input.Length == 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("FEHLER: Ungültige Eingabe!");
-                    }
-                    else
-                        break;
-                }
+                string input = InputAnswer();
                 Console.ResetColor();
                 bool isRightInput = vocab.IsRightInput(input);
                 vocab.LogInput(vocab.IsRightInput(input));
@@ -65,6 +52,26 @@ namespace Vokabeltrainer.Menus
                 Console.WriteLine();
                 Console.ReadKey();
             }
+        }
+
+        private string InputAnswer()
+        {
+            string answer;
+            while (true)
+            {
+                Console.ResetColor();
+                Console.Write("Antwort: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                answer = Console.ReadLine();
+                if (answer.Length == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("FEHLER: Ungültige Eingabe!");
+                }
+                else
+                    break;
+            }
+            return answer;
         }
     }
 }
