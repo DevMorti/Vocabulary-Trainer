@@ -21,10 +21,10 @@ namespace Vokabeltrainer.Vocabs
 
         public Vocab(Vocab vocab)
         {
-            vocab.Question = Question;
-            vocab.Answer = Answer;
-            vocab.Form = Form;
-            vocab.Level = Level;
+            Question = vocab.Question;
+            Answer = vocab.Answer;
+            Form = vocab.Form;
+            Level = vocab.Level;
         }
 
         public Vocab(string vocabString)
