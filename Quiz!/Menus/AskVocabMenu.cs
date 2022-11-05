@@ -14,12 +14,23 @@ namespace Vokabeltrainer.Menus
     {
         public override void DisplayMenu()
         {
-            new SelectOptionMenu(SelectOptionTemplates.SubjectMenu);
-            new SelectOptionMenu(SelectOptionTemplates.AskingDirectionMenu);
-            Console.Clear();
-            RequestLoop();
-            SummarizeRequest();
-            SubjectManager.CurrentSubject.Save();
+            if (SubjectManager.GetSubjectNames().Count() != 0)
+            {
+                new SelectOptionMenu(SelectOptionTemplates.SubjectMenu);
+                new SelectOptionMenu(SelectOptionTemplates.AskingDirectionMenu);
+                Console.Clear();
+                RequestLoop();
+                SummarizeRequest();
+                SubjectManager.CurrentSubject.Save();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Es sind noch keine Vokabeln vorhanden!");
+                Console.WriteLine("Bitte gebe zunächst Vokabeln ein!");
+                Console.ReadKey();
+                Console.ResetColor();
+            }
             new SelectOptionMenu(SelectOptionTemplates.StartMenu);
         }
 
@@ -28,7 +39,6 @@ namespace Vokabeltrainer.Menus
             Queue<VocabRequest> requests = RequestManager.CurrentRequest.Requests;
             while(requests.Count > 0)
             {
-                Console.Clear();
                 VocabRequest vocab = requests.Dequeue();
                 Console.WriteLine($"Abfrage -- {SubjectManager.CurrentSubject.Name} -- Noch {requests.Count + 1} Vokabeln");
                 Console.WriteLine("---------------------------------------");
@@ -59,6 +69,7 @@ namespace Vokabeltrainer.Menus
                 Debug.WriteLine($"6. {vocab.ToString()}");
                 Console.WriteLine();
                 Console.ReadKey();
+                Console.Clear();
             }
         }
 
