@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Vokabeltrainer.Menus.SelectOption;
 using Vokabeltrainer.Vocabs;
 using Vokabeltrainer.Management;
+using System.Diagnostics;
 
 namespace Vokabeltrainer.Menus
 {
@@ -17,6 +18,7 @@ namespace Vokabeltrainer.Menus
             new SelectOptionMenu(SelectOptionTemplates.AskingDirectionMenu);
             Console.Clear();
             RequestLoop();
+            SummarizeRequest();
             SubjectManager.CurrentSubject.Save();
             new SelectOptionMenu(SelectOptionTemplates.StartMenu);
         }
@@ -36,9 +38,13 @@ namespace Vokabeltrainer.Menus
                 Console.WriteLine(vocab.GetQuestion());
                 string input = InputAnswer();
                 Console.ResetColor();
+                Debug.WriteLine($"1. {vocab.ToString()}");
                 bool isRightInput = vocab.IsRightInput(input);
+                Debug.WriteLine($"2. {vocab.ToString()}");
                 vocab.LogInput(vocab.IsRightInput(input));
+                Debug.WriteLine($"3. {vocab.ToString()}");
                 SubjectManager.CurrentSubject.ChangeVocab(vocab);
+                Debug.WriteLine($"4. {vocab.ToString()}");
                 if (isRightInput)
                 {
                     Console.Write("Richtig: ");
@@ -48,7 +54,9 @@ namespace Vokabeltrainer.Menus
                     Console.Write("Falsch: ");
                     requests.Enqueue(vocab);
                 }
+                Debug.WriteLine($"5. {vocab.ToString()}");
                 vocab.PrintReaction(input);
+                Debug.WriteLine($"6. {vocab.ToString()}");
                 Console.WriteLine();
                 Console.ReadKey();
             }
@@ -72,6 +80,20 @@ namespace Vokabeltrainer.Menus
                     break;
             }
             return answer;
+        }
+
+        private void SummarizeRequest()
+        {
+            Console.WriteLine($"Super gemacht: {RequestManager.CurrentRequest.PercentRight()}% richtig");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine();
+            Console.WriteLine("Merke");
+            Console.WriteLine("-----");
+            foreach(Vocab vocab in RequestManager.CurrentRequest.WrongVocabs)
+            {
+                Console.WriteLine(vocab.ToString());
+            }
+            Console.ReadKey();
         }
     }
 }

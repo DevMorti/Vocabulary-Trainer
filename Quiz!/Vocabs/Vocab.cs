@@ -6,9 +6,9 @@ namespace Vokabeltrainer.Vocabs
     [Serializable]
     internal class Vocab
     {
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        public string Form { get; set; }
+        public string Question { get; private set; }
+        public string Answer { get; private set; }
+        public string Form { get; private set; }
         public byte Level { get; protected set; }
 
         public Vocab(string question, string answer, string form, byte level)

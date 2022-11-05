@@ -31,7 +31,8 @@ namespace Vokabeltrainer.Vocabs
 
         internal static string FormatVocabAnswer(this string word)
         {
-            word = word.RemoveLettersIn('(', ')');
+            if(word.Contains('('))
+                word = word.RemoveLettersIn('(', ')');
             word = word.ToLower();
             word = word.RemoveSymbols();
             return word;
