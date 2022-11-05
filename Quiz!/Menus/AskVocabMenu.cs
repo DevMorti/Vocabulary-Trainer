@@ -48,13 +48,9 @@ namespace Vokabeltrainer.Menus
                 Console.WriteLine(vocab.GetQuestion());
                 string input = InputAnswer();
                 Console.ResetColor();
-                Debug.WriteLine($"1. {vocab.ToString()}");
                 bool isRightInput = vocab.IsRightInput(input);
-                Debug.WriteLine($"2. {vocab.ToString()}");
                 vocab.LogInput(vocab.IsRightInput(input));
-                Debug.WriteLine($"3. {vocab.ToString()}");
                 SubjectManager.CurrentSubject.ChangeVocab(vocab);
-                Debug.WriteLine($"4. {vocab.ToString()}");
                 if (isRightInput)
                 {
                     Console.Write("Richtig: ");
@@ -64,9 +60,7 @@ namespace Vokabeltrainer.Menus
                     Console.Write("Falsch: ");
                     requests.Enqueue(vocab);
                 }
-                Debug.WriteLine($"5. {vocab.ToString()}");
                 vocab.PrintReaction(input);
-                Debug.WriteLine($"6. {vocab.ToString()}");
                 Console.WriteLine();
                 Console.ReadKey();
                 Console.Clear();
