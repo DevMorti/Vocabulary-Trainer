@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quiz_.Menus.SelectOption;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Vokabeltrainer.Menus.SelectOption
 {
-    internal delegate List<Option> OptionsDelegate();
+    internal delegate List<IOption> OptionsDelegate();
     internal class DynamicSelectOptionTemplate
     {
         public OptionsDelegate GetOptions { get; private set; }

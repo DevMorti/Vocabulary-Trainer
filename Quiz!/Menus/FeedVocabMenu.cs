@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Vokabeltrainer.Management;
@@ -50,7 +51,6 @@ namespace Vokabeltrainer.Menus
             Console.WriteLine("show --all - Letzte Vokabeln anzeigen");
             Console.WriteLine("edit --rmall - Alle Vokabeln löschen");
             Console.ResetColor();
-            //Console.WriteLine("edit --last - Letzte Vokabel editieren");//nicht implementiert
             Console.WriteLine();
             InputVocabs();
         }

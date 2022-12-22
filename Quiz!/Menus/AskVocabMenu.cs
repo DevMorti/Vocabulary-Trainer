@@ -89,15 +89,17 @@ namespace Vokabeltrainer.Menus
 
         private void SummarizeRequest()
         {
-            Console.WriteLine($"Super gemacht: {RequestManager.CurrentRequest.PercentRight()}% richtig");
+            Console.WriteLine($"Super gemacht: {(int)RequestManager.CurrentRequest.PercentRight()}% richtig");
             Console.WriteLine("------------------------------");
             Console.WriteLine();
             Console.WriteLine("Merke");
             Console.WriteLine("-----");
-            foreach(Vocab vocab in RequestManager.CurrentRequest.WrongVocabs)
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (Vocab vocab in RequestManager.CurrentRequest.WrongVocabs)
             {
                 Console.WriteLine(vocab.ToString());
             }
+            Console.ResetColor();
             Console.ReadKey();
         }
     }

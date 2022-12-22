@@ -1,11 +1,13 @@
-﻿namespace Vokabeltrainer.Menus.SelectOption
+﻿using Quiz_.Menus.SelectOption;
+
+namespace Vokabeltrainer.Menus.SelectOption
 {
     internal class SelectOptionTemplate
     {
-        public Option[] Options { get; private set; }
+        public Quiz_.Menus.SelectOption.IOption[] Options { get; private set; }
         public string Message { get; private set; }
 
-        public SelectOptionTemplate(Option[] options, string message)
+        public SelectOptionTemplate(Quiz_.Menus.SelectOption.IOption[] options, string message)
         {
             Options = options;
             Message = message;

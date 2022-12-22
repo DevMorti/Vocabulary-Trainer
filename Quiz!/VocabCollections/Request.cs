@@ -11,7 +11,7 @@ namespace Vokabeltrainer.VocabCollections
     internal class Request
     {
         internal AskingDirection AskingDirection { get; private set; }
-        internal List<Vocab> WrongVocabs { get; private set; }
+        internal List<Vocab> WrongVocabs { get; set; }
         internal Queue<VocabRequest> Requests { get; private set; }
         internal int CountedRequests { get; private set; }
 
@@ -23,14 +23,25 @@ namespace Vokabeltrainer.VocabCollections
             CountedRequests = Requests.Count;
         }
 
-        public int PercentWrong()
+        public Request(AskingDirection askingDirection, string lectionName)
         {
-            return WrongVocabs.Count / CountedRequests * 100;
+            AskingDirection= askingDirection;
+            WrongVocabs = new List<Vocab>();
+            Requests = SubjectManager.CurrentSubject.GetRequest(lectionName);
+            CountedRequests = Requests.Count;
         }
 
-        public int PercentRight()
+        public float PercentWrong()
         {
-            return 100 - PercentWrong();
+            float result = WrongVocabs.Count();
+            result = (result / CountedRequests) * 100;
+            return result;
+        }
+
+        public float PercentRight()
+        {
+            float result = 100 - PercentWrong();
+            return result;
         }
     }
 }

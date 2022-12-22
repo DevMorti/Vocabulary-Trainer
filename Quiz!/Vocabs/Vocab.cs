@@ -34,7 +34,7 @@ namespace Vokabeltrainer.Vocabs
             string[] splittetString = vocabString.Split('&');
             Answer = splittetString[0];
             Question = splittetString[splittetString.Length - 1];
-            Level = 0;
+            Level = 1;
             if (splittetString.Length == 3)
                 Form = splittetString[1];
             else
@@ -56,7 +56,7 @@ namespace Vokabeltrainer.Vocabs
             else if (direction == AskingDirection.QuestionToAnswer)
                 return Answer;
             else if (Form != null)
-                return Question + " " + Form;
+                return Form + " " + Question;
             else
                 return Question;
         }

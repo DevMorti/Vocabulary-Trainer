@@ -102,10 +102,11 @@ namespace Vokabeltrainer.Vocabs
             }
             else
             {
-                if (FirstTimeRight && Level > 0)//wenn Vokabel noch nicht abgefragt wurde und falsch war
+                if (FirstTimeRight)//wenn Vokabel noch nicht abgefragt wurde und falsch war
                 {
-                    Level--;
-                    RequestManager.CurrentRequest.WrongVocabs.Add(new Vocab(this));
+                    if(Level > 0)
+                        Level--;
+                    RequestManager.CurrentRequest.WrongVocabs.Add(this);
                 }
                 FirstTimeRight = false;
                 LastTimeRight = false;

@@ -43,10 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Management\VocabManager.cs" />
+    <Compile Include="Menus\EditVocabMenu.cs" />
+    <Compile Include="Menus\SelectOption\ChooseVocabOption.cs" />
+    <Compile Include="Menus\SelectOption\IOption.cs" />
     <Compile Include="VocabCollections\Request.cs" />
     <Compile Include="Management\RequestManager.cs" />
     <Compile Include="Management\LectionManager.cs" />
     <Compile Include="Management\SubjectManager.cs" />
+    <Compile Include="VocabCollections\VocabCollectionsExtensions.cs" />
     <Compile Include="Vocabs\AskingDirection.cs" />
     <Compile Include="Menus\AskVocabMenu.cs" />
     <Compile Include="Menus\CreateLectionMenu.cs" />

@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Quiz_.Menus.SelectOption;
+using System;
 
 namespace Vokabeltrainer.Menus.SelectOption
 {
     internal class SelectOptionMenu
     {
-        private Option[] Options { get; set; }
+        private IOption[] Options { get; set; }
         private int Index { get; set; }
         private string Message { get; set; }
 
-        public SelectOptionMenu(Option[] options, string message)
+        public SelectOptionMenu(IOption[] options, string message)
         {
             Options = options;
             Message = message;
@@ -72,7 +73,7 @@ namespace Vokabeltrainer.Menus.SelectOption
 
         private void PrintOptions()
         {
-            foreach(Option option in Options)
+            foreach(IOption option in Options)
             {
                 Console.WriteLine();
                 if(option == Options[Index])
