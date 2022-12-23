@@ -25,7 +25,7 @@ namespace Vokabeltrainer.VocabCollections
             Lections = new List<Lection>();
         }
 
-        public Queue<VocabRequest> GetRequest()
+        public Queue<VocabRequest> GetRequest(AskingDirection askingDirection)
         {
             var Requests = from lection in Lections
                                    from vocab in lection
@@ -55,17 +55,17 @@ namespace Vokabeltrainer.VocabCollections
                     levelGroup.Remove(vocab);
                 }
             }
-            return filtered.ToRequestQueue();
+            return filtered.ToRequestQueue(askingDirection);
         }
 
-        public Queue<VocabRequest> GetRequest(string lectionName)
+        public Queue<VocabRequest> GetRequest(string lectionName, AskingDirection askingDirection)
         {
             var filteredRequests = from lection in Lections
                                    where lection.Name == lectionName
                                    from vocab in lection
                                    //hier sollten Filter eingefügt werden
                                    select vocab;
-            return filteredRequests.ToRequestQueue();
+            return filteredRequests.ToRequestQueue(askingDirection);
         }
 
         public void ChangeVocab(Vocab originVocab, Vocab changedVocab)

@@ -9,7 +9,7 @@ namespace Vokabeltrainer.VocabCollections
 {
     internal static class VocabCollectionsExtensions
     {
-        public static Queue<VocabRequest> ToRequestQueue(this IEnumerable<Vocab> vocabIEnumerable)
+        public static Queue<VocabRequest> ToRequestQueue(this IEnumerable<Vocab> vocabIEnumerable, AskingDirection askingDirection)
         {
             List<Vocab> vocabs = vocabIEnumerable.ToList();
             Queue<VocabRequest> RequestQueue = new Queue<VocabRequest>();
@@ -17,7 +17,7 @@ namespace Vokabeltrainer.VocabCollections
             for(int i = vocabs.Count(); i > 0; i--)
             {
                 Vocab vocab = vocabs.ElementAt(random.Next(0, vocabs.Count()));
-                RequestQueue.Enqueue(new VocabRequest(vocab));
+                RequestQueue.Enqueue(new VocabRequest(vocab, askingDirection));
                 vocabs.Remove(vocab);
             }
             return RequestQueue;

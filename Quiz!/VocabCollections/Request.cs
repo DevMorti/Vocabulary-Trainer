@@ -19,15 +19,15 @@ namespace Vokabeltrainer.VocabCollections
         {
             AskingDirection = askingDirection;
             WrongVocabs = new List<Vocab>();
-            Requests = SubjectManager.CurrentSubject.GetRequest();
+            Requests = SubjectManager.CurrentSubject.GetRequest(askingDirection);
             CountedRequests = Requests.Count;
         }
 
         public Request(AskingDirection askingDirection, string lectionName)
         {
-            AskingDirection= askingDirection;
+            AskingDirection = askingDirection;
             WrongVocabs = new List<Vocab>();
-            Requests = SubjectManager.CurrentSubject.GetRequest(lectionName);
+            Requests = SubjectManager.CurrentSubject.GetRequest(lectionName, askingDirection);
             CountedRequests = Requests.Count;
         }
 

@@ -10,6 +10,7 @@ namespace Vokabeltrainer.Vocabs
     {
         QuestionToAnswer = 0,
         AnswerToQuestion = 1,
+        Mixed = 2,
     }
 
     internal enum AskingDirectionOrRandom

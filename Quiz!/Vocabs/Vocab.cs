@@ -61,22 +61,12 @@ namespace Vokabeltrainer.Vocabs
                 return Question;
         }
 
-        public string GetAnswer()
-        {
-            return GetAnswer(RequestManager.CurrentRequest.AskingDirection);
-        }
-
         public string GetQuestion(AskingDirection direction)
         {
             if (direction == AskingDirection.QuestionToAnswer)
                 return Question;
             else
                 return Answer;
-        }
-
-        public string GetQuestion()
-        {
-            return GetQuestion(RequestManager.CurrentRequest.AskingDirection);
         }
 
         public override string ToString()

@@ -49,7 +49,7 @@ namespace Vokabeltrainer.Menus
                 string input = InputAnswer();
                 Console.ResetColor();
                 bool isRightInput = vocab.IsRightInput(input);
-                vocab.LogInput(vocab.IsRightInput(input));
+                vocab.LogInput(isRightInput);
                 SubjectManager.CurrentSubject.ChangeVocab(vocab);
                 if (isRightInput)
                 {

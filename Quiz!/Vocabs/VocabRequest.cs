@@ -7,16 +7,15 @@ namespace Vokabeltrainer.Vocabs
     {
         public bool FirstTimeRight { get; private set; }
         public bool LastTimeRight { get; private set; }
+        private AskingDirection AskingDirection { get; set; }
 
-        public VocabRequest(string question, string answer, string form, byte level) : base(question, answer, form, level)
+        public VocabRequest(string question, string answer, string form, byte level, AskingDirection askingDirection) : base(question, answer, form, level)
         {
-            FirstTimeRight = true;
-            LastTimeRight = false;
+            InitializeRequestProperties(askingDirection);
         }
-        public VocabRequest(Vocab vocab) : base(vocab.Question, vocab.Answer, vocab.Form, vocab.Level)
+        public VocabRequest(Vocab vocab, AskingDirection askingDirection) : base(vocab.Question, vocab.Answer, vocab.Form, vocab.Level)
         {
-            FirstTimeRight = true;
-            LastTimeRight = false;
+            InitializeRequestProperties(askingDirection);
         }
 
         public bool IsRightInput(string input, AskingDirection direction)
@@ -31,7 +30,7 @@ namespace Vokabeltrainer.Vocabs
 
         public bool IsRightInput(string input)
         {
-            return IsRightInput(input, RequestManager.CurrentRequest.AskingDirection);
+            return IsRightInput(input, AskingDirection);
         }
 
         public void PrintReaction(string input, AskingDirection direction)
@@ -88,7 +87,7 @@ namespace Vokabeltrainer.Vocabs
 
         public void PrintReaction(string input)
         {
-            PrintReaction(input, RequestManager.CurrentRequest.AskingDirection);
+            PrintReaction(input, AskingDirection);
         }
 
         public void LogInput(bool rightInput)
@@ -110,6 +109,30 @@ namespace Vokabeltrainer.Vocabs
                 }
                 FirstTimeRight = false;
                 LastTimeRight = false;
+            }
+        }
+
+        public string GetAnswer() 
+        {
+            return GetAnswer(AskingDirection);
+        }
+
+        public string GetQuestion()
+        {
+            return GetQuestion(AskingDirection);
+        }
+
+        private void InitializeRequestProperties(AskingDirection askingDirection)
+        {
+            FirstTimeRight = true;
+            LastTimeRight = false;
+            if (askingDirection != AskingDirection.Mixed)
+                AskingDirection = askingDirection;
+            else
+            {
+                Random random = new Random();
+                int direction = random.Next(0, 2);
+                AskingDirection = (AskingDirection)direction;
             }
         }
     }

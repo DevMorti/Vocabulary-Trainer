@@ -48,6 +48,10 @@ namespace Vokabeltrainer.Menus.SelectOption
                 new Option($"{SubjectManager.CurrentSubject.Name} -> Form + Deutsch", () =>
                 {
                     RequestManager.CurrentRequest = new Request(AskingDirection.AnswerToQuestion);
+                }),
+                new Option("Gemischt", () =>
+                {
+                    RequestManager.CurrentRequest = new Request(AskingDirection.Mixed);
                 })
             };
             return options;
