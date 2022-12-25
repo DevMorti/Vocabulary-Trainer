@@ -5,9 +5,27 @@ namespace Vokabeltrainer.Vocabs
 {
     internal class VocabRequest : Vocab
     {
+        public static Random Random = new Random();
         public bool FirstTimeRight { get; private set; }
         public bool LastTimeRight { get; private set; }
-        private AskingDirection AskingDirection { get; set; }
+        private AskingDirection askingDirection;
+        private AskingDirection AskingDirection 
+        { 
+            get 
+            {
+                return askingDirection;
+            } 
+            set 
+            {
+                if (value != AskingDirection.Mixed)
+                    askingDirection = value;
+                else
+                {
+                    int direction = Random.Next(0, 2);
+                    askingDirection = (AskingDirection)direction;
+                }
+            }
+        }
 
         public VocabRequest(string question, string answer, string form, byte level, AskingDirection askingDirection) : base(question, answer, form, level)
         {
@@ -126,14 +144,7 @@ namespace Vokabeltrainer.Vocabs
         {
             FirstTimeRight = true;
             LastTimeRight = false;
-            if (askingDirection != AskingDirection.Mixed)
-                AskingDirection = askingDirection;
-            else
-            {
-                Random random = new Random();
-                int direction = random.Next(0, 2);
-                AskingDirection = (AskingDirection)direction;
-            }
+            AskingDirection = askingDirection;
         }
     }
 }
