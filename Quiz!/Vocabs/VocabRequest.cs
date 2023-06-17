@@ -9,7 +9,7 @@ namespace Vokabeltrainer.Vocabs
         public bool FirstTimeRight { get; private set; }
         public bool LastTimeRight { get; private set; }
         private AskingDirection askingDirection;
-        private AskingDirection AskingDirection 
+        private AskingDirection AskingDirection
         { 
             get 
             {
